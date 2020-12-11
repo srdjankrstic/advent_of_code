@@ -13,5 +13,5 @@ args = parser.parse_args()
 f = open(args.input, "r")
 lines = f.read()
 
-for line in contents.splitlines():
+for line in lines.splitlines():
     pass
