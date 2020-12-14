@@ -7,6 +7,8 @@ from hashlib import md5
 from advent_of_code import lib
 from copy import deepcopy
 
+di = lib.di4
+dj = lib.dj4
 
 parser = argparse.ArgumentParser()
 parser.add_argument("input")
