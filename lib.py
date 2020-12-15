@@ -1,10 +1,7 @@
-import argparse
 import re
-from collections import defaultdict
-from hashlib import md5
-import itertools as it
-import math
 from functools import reduce
+import numpy
+from hashlib import md5
 
 # I/O
 def rints(line):
@@ -77,6 +74,12 @@ def hex1(x):
 
 def popcnt(x):
     return bin(x).count('1')
+
+# grid/matrix stuff
+def zarray(n, val=0, dtype=int):
+    if isint(n):
+        n = [n, n]
+    return numpy.full(n, val, dtype)
 
 # Random
 def hmd5(*c):

@@ -6,6 +6,7 @@ import math
 from hashlib import md5
 from advent_of_code import lib
 from copy import deepcopy
+import numpy as np
 
 di = lib.di4
 dj = lib.dj4
