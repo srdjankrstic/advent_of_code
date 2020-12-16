@@ -7,6 +7,9 @@ from hashlib import md5
 def rints(line):
     return [int(x) for x in (re.findall(r'\d+', line) or [])]
 
+def rnints(line):
+    return [int(x) for x in (re.findall(r'-?\d+', line) or [])]
+
 def rem(ptr, line):
     return re.match(f"^{ptr}$", line)
 
