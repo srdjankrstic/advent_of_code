@@ -1,6 +1,7 @@
 import argparse
 import re
 from collections import defaultdict
+from functools import reduce
 import itertools as it
 import math
 from hashlib import md5
@@ -8,6 +9,7 @@ from advent_of_code import lib
 from copy import deepcopy
 import numpy as np
 import json
+import sympy.ntheory.factor_
 
 di = lib.di4
 dj = lib.dj4
