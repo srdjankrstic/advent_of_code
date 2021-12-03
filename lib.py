@@ -1,4 +1,5 @@
 import re
+import math
 from functools import reduce
 import numpy
 from hashlib import md5
@@ -115,6 +116,12 @@ class Point:
             self.coords = list(coords[0])
         self.dim = len(self.coords)
 
+    def norm(self, _norm=1):
+        if _norm == 0:  # Chebyshev, NB different than what normally people think of as L0
+            return max([abs(c) for c in self.coords])
+        else:
+            return sum([abs(c)**_norm for c in self.coords])**(1/_norm)
+
     def distance(self, other, norm=1):
         if norm == 0:  # Chebyshev, NB different than what normally people think of as L0
             return max([abs(c1 - c2) for c1, c2 in zip(self.coords, other.coords)])
@@ -152,6 +159,9 @@ class Point:
 
     def __hash__(self):
         return hash(self.coords)
+
+    def __getitem__(self, index):
+        return self.coords[index]
 
     def __repr__(self):
         return repr(self.coords)
