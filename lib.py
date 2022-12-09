@@ -158,7 +158,7 @@ class Point:
                 yield Point([c1 + c2 for c1, c2 in zip(self.coords, delta)])
 
     def __hash__(self):
-        return hash(self.coords)
+        return hash(tuple(self.coords))
 
     def __getitem__(self, index):
         return self.coords[index]
