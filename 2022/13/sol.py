@@ -1,7 +1,7 @@
 import argparse
 import re
 from collections import defaultdict
-from functools import reduce
+from functools import reduce, cmp_to_key
 import itertools as it
 import math
 from hashlib import md5
@@ -55,14 +55,7 @@ def f2(lines):
         for j in i.split("\n"):
             groups.append(eval(j))
 
-    n = len(groups)
-    for i in range(n - 1):
-        for j in range(i + 1, n):
-            if right(groups[i], groups[j]) == -1:
-                tmp = groups[i]
-                groups[i] = groups[j]
-                groups[j] = tmp
-
+    groups = sorted(groups, key=cmp_to_key(right), reverse=True)
     i1 = 0; i2 = 0
     for i, g in enumerate(groups):
         if g == [[2]]:
@@ -73,7 +66,6 @@ def f2(lines):
     return sol
 
 f = open(args.input, "r")
-# lines = [line for line in f.read().splitlines() if line.strip()]
 
 if args.part == 1:
     print(f"solution: {f1(f.read())}")
