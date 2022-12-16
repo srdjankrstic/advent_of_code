@@ -128,6 +128,14 @@ class Point:
         else:
             return sum([abs(c1 - c2)**norm for c1, c2 in zip(self.coords, other.coords)])**(1/norm)
 
+    def at_l1_dist(self, dist):
+        if len(self.coords) != 2:
+            raise ValueError("only implemeted for 2D")
+        for x in range(-dist, dist + 1):
+            y = dist - abs(x)
+            yield Point(self.coords[0] + x, self.coords[1] - y)
+            yield Point(self.coords[0] + x, self.coords[1] + y)
+
     def neigh_hinorm(self, *, norm=2, dist=1, include_self=False):
         deltas = it.product(range(-dist, dist+1), repeat=self.dim)
         for delta in deltas:
