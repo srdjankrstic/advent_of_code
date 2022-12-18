@@ -130,11 +130,14 @@ class Point:
 
     def at_l1_dist(self, dist):
         if len(self.coords) != 2:
-            raise ValueError("only implemeted for 2D")
-        for x in range(-dist, dist + 1):
-            y = dist - abs(x)
-            yield Point(self.coords[0] + x, self.coords[1] - y)
-            yield Point(self.coords[0] + x, self.coords[1] + y)
+            for p in self.neigh_l1(dist):
+                if self.distance(p) == dist:
+                    yield p
+        else:
+            for x in range(-dist, dist + 1):
+                y = dist - abs(x)
+                yield Point(self.coords[0] + x, self.coords[1] - y)
+                yield Point(self.coords[0] + x, self.coords[1] + y)
 
     def neigh_hinorm(self, *, norm=2, dist=1, include_self=False):
         deltas = it.product(range(-dist, dist+1), repeat=self.dim)
@@ -181,6 +184,11 @@ class Point:
         if self.dim != other.dim:
             raise ValueError("dimension mismatch")
         return Point([c1 + c2 for c1, c2 in zip(self.coords, other.coords)])
+
+    def __sub__(self, other):
+        if self.dim != other.dim:
+            raise ValueError("dimension mismatch")
+        return Point([c1 - c2 for c1, c2 in zip(self.coords, other.coords)])
 
 
 # first 10k, up to ~100k
