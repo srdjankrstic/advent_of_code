@@ -109,11 +109,11 @@ def isiterable(obj):
 class Point:
     def __init__(self, *coords):
         if len(coords) > 1:
-            self.coords = list(coords)
+            self.coords = tuple(coords)
         elif not isiterable(coords[0]):
             raise TypeError
         else:
-            self.coords = list(coords[0])
+            self.coords = tuple(coords[0])
         self.dim = len(self.coords)
 
     def norm(self, _norm=1):
@@ -166,13 +166,21 @@ class Point:
                 yield Point([c1 + c2 for c1, c2 in zip(self.coords, delta)])
 
     def __hash__(self):
-        return hash(tuple(self.coords))
+        return hash(self.coords)
 
     def __getitem__(self, index):
         return self.coords[index]
 
     def __repr__(self):
         return repr(self.coords)
+
+    def __eq__(self, other):
+        return self.__hash__() == other.__hash__()
+
+    def __add__(self, other):
+        if self.dim != other.dim:
+            raise ValueError("dimension mismatch")
+        return Point([c1 + c2 for c1, c2 in zip(self.coords, other.coords)])
 
 
 # first 10k, up to ~100k
