@@ -137,7 +137,8 @@ class Point:
             for x in range(-dist, dist + 1):
                 y = dist - abs(x)
                 yield Point(self.coords[0] + x, self.coords[1] - y)
-                yield Point(self.coords[0] + x, self.coords[1] + y)
+                if y:
+                    yield Point(self.coords[0] + x, self.coords[1] + y)
 
     def neigh_hinorm(self, *, norm=2, dist=1, include_self=False):
         deltas = it.product(range(-dist, dist+1), repeat=self.dim)
