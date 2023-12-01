@@ -1,2 +1,5 @@
 __pycache__/
 *.py[cod]
+.aoc.secret
+.answers.log
+.meta
