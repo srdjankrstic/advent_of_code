@@ -23,18 +23,11 @@ def isint(s):
     return True
 
 # MATH
-def gcd(a, b):
-    if b > a:
-        return gcd(b, a)
-    if b == 0:
-        return a
-    return gcd(b, a % b)
+def gcd(*x):
+    return math.gcd(*x)
 
 def lcm(*x):
-    if len(x) == 2:
-        return x[0] * x[1] // gcd(x[0], x[1])
-    else:
-        return lcm(x[0], lcm(*x[1:]))
+    return math.lcm(*x)
 
 def isprime(num):
     x = int(math.sqrt(num))
